@@ -7,6 +7,10 @@ public class Account {
 	private String firstName;
 	private String lastName;
 
+	public Account() {
+		super();
+	}
+
 	public Account(int id, String accountNumber, String firstName, String lastName) {
 		super();
 		this.id = id;
