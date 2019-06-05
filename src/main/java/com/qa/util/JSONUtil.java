@@ -1,22 +1,45 @@
 package com.qa.util;
 
-import com.google.gson.Gson;
+import java.io.IOException;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JSONUtil {
-
-	private Gson gson;
+	private ObjectMapper json;
 
 	public JSONUtil() {
-		this.gson = new Gson();
+		this.json = new ObjectMapper();
 	}
 
 	public String getJSONForObject(Object obj) {
-		return gson.toJson(obj);
+		try {
+			return json.writeValueAsString(obj);
+		} catch (JsonProcessingException e) {
+
+			e.printStackTrace();
+			return e.getMessage();
+		}
+
 	}
 
 	public <T> T getObjectForJSON(String jsonString, Class<T> clazz) {
-		
-		return gson.fromJson(jsonString, clazz);
+
+		try {
+			return json.readValue(jsonString, clazz);
+		} catch (JsonParseException e) {
+
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+
+			e.printStackTrace();
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
