@@ -3,7 +3,6 @@ package com.qa.MapTests;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.qa.persistence.domain.Account;
@@ -48,7 +47,7 @@ public class AccountServiceTest {
 	@Test
 	public void addAccountTest() {
 		String accToCreate = jsonUtil.getJSONForObject(acc1);
-		System.out.println(accToCreate);
+		// System.out.println(accToCreate);
 		assertEquals(amr.createAccount(accToCreate), "Account successfuly created");
 		assertEquals(amr.getAccountMap().size(), 1);
 
@@ -113,21 +112,28 @@ public class AccountServiceTest {
 	}
 
 	@Test
-	@Ignore
 	public void getCountForFirstNamesInAccountWhenZeroOccurances() {
-
+		int nameList = amr.numAccWFirstName("not a name");
+		// System.out.println(amr.getAccountMap().values());
+		assertEquals(0, nameList);
 	}
 
 	@Test
-	@Ignore
 	public void getCountForFirstNamesInAccountWhenOne() {
-
+		amr.getAccountMap().put(1, acc1);
+		amr.getAccountMap().put(2, acc2);
+		amr.getAccountMap().put(3, acc3);
+		int nameList = amr.numAccWFirstName("Bert");
+		assertEquals(1, nameList);
 	}
 
 	@Test
-	@Ignore
 	public void getCountForFirstNamesInAccountWhenTwo() {
-
+		amr.getAccountMap().put(1, acc1);
+		amr.getAccountMap().put(2, acc2);
+		amr.getAccountMap().put(3, acc3);
+		int nameList = amr.numAccWFirstName("Matt");
+		assertEquals(2, nameList);
 	}
 
 }
