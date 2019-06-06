@@ -39,14 +39,14 @@ public class AccountMapRepository implements AccountRepository {
 		return "Account successfuly created";
 	}
 
-	public String deleteAccount(int accountNumber) {
-		accountMap.remove((Integer) accountNumber);
+	public String deleteAccount(int id) {
+		accountMap.remove((Integer) id);
 		return "Account successfully removed";
 	}
 
-	public String updateAccount(int accountNumber, String account) {
+	public String updateAccount(int id, String account) {
 		Account accToUpdate = util.getObjectForJSON(account, Account.class);
-		accountMap.put(accountNumber, accToUpdate);
+		accountMap.put(id, accToUpdate);
 
 		return "Account successfully updated";
 	}

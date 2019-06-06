@@ -6,9 +6,9 @@ public interface AccountRepository {
 
 	String createAccount(String account);
 
-	String deleteAccount(int accountNumber);
+	String deleteAccount(int id);
 
-	String updateAccount(int accountNumber, String account);
+	String updateAccount(int id, String account);
 
 	int cycleAccounts(String fName);
 
