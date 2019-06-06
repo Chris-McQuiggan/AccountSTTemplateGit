@@ -46,12 +46,8 @@ public class AccountDatabaseRepository implements AccountRepository {
 	@Transactional(TxType.REQUIRED)
 	@Override
 	public String deleteAccount(int id) {
-		TypedQuery<Account> query = null;
 		Account acc1 = em.getReference(Account.class, id);
 		em.remove(acc1);
-		// query = em.createQuery("DELETE FROM Account a WHERE a.id = " + id,
-		// Account.class);
-		// query.executeUpdate();
 		return "Deleted";
 	}
 
