@@ -3,6 +3,7 @@ package com.qa.MapTests;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.qa.persistence.domain.Account;
@@ -23,12 +24,14 @@ public class AccountServiceTest {
 	}
 
 	@Test
+	@Ignore
 	public void getAllAccountsTest() {
 
 		assertEquals("{}", amr.getAllAccounts());
 	}
 
 	@Test
+	@Ignore
 	public void getAllAccountsTest2() {
 
 		amr.getAccountMap().put(1, acc1);
@@ -37,6 +40,7 @@ public class AccountServiceTest {
 	}
 
 	@Test
+	@Ignore
 	public void updateAccountTest() {
 
 		amr.getAccountMap().put(1, acc1);
@@ -45,6 +49,7 @@ public class AccountServiceTest {
 	}
 
 	@Test
+	@Ignore
 	public void addAccountTest() {
 		String accToCreate = jsonUtil.getJSONForObject(acc1);
 		// System.out.println(accToCreate);
@@ -54,6 +59,7 @@ public class AccountServiceTest {
 	}
 
 	@Test
+	@Ignore
 	public void add2AccountsTest() {
 		assertEquals(amr.createAccount(jsonUtil.getJSONForObject(acc1)), "Account successfuly created");
 		assertEquals(amr.createAccount(jsonUtil.getJSONForObject(acc2)), "Account successfuly created");

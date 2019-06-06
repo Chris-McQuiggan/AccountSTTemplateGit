@@ -8,7 +8,7 @@ public interface AccountService {
 	// R
 	String getAllAccounts();
 
-	// String getAccount(int id);
+	String getAccount(int id);
 
 	// U
 	String updateAccount(String account, int id);

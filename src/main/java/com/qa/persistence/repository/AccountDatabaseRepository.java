@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.enterprise.inject.Default;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -18,6 +19,9 @@ import com.qa.util.JSONUtil;
 @Transactional(TxType.SUPPORTS)
 @Default
 public class AccountDatabaseRepository implements AccountRepository {
+
+	@Inject
+	private JSONUtil util;
 
 	@PersistenceContext(unitName = "primary")
 	private EntityManager em;
@@ -66,6 +70,11 @@ public class AccountDatabaseRepository implements AccountRepository {
 
 		return validList.size();
 
+	}
+
+	@Override
+	public String getAccount(int id) {
+		return util.getJSONForObject(em.find(Account.class, id));
 	}
 
 }

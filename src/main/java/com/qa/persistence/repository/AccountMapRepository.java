@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.enterprise.inject.Alternative;
+import javax.inject.Inject;
 
 import com.qa.persistence.domain.Account;
 import com.qa.util.JSONUtil;
@@ -12,7 +13,8 @@ import com.qa.util.JSONUtil;
 public class AccountMapRepository implements AccountRepository {
 
 	Map<Integer, Account> accountMap = new HashMap<Integer, Account>();
-
+	@Inject
+	private JSONUtil util;
 	// You must provide concrete implementation for each of these methods
 	// do not change the method signature
 	// THINK - if the parameter is a String
@@ -25,12 +27,12 @@ public class AccountMapRepository implements AccountRepository {
 
 	public String getAllAccounts() {
 
-		return new JSONUtil().getJSONForObject(accountMap);
+		return util.getJSONForObject(accountMap);
 
 	}
 
 	public String createAccount(String account) {
-		Account newAccount = new JSONUtil().getObjectForJSON(account, Account.class);
+		Account newAccount = util.getObjectForJSON(account, Account.class);
 		accountMap.put(newAccount.getId(), newAccount);
 		return "Account successfuly created";
 	}
@@ -41,15 +43,21 @@ public class AccountMapRepository implements AccountRepository {
 	}
 
 	public String updateAccount(int accountNumber, String account) {
-		Account accToUpdate = new JSONUtil().getObjectForJSON(account, Account.class);
+		Account accToUpdate = util.getObjectForJSON(account, Account.class);
 		accountMap.put(accountNumber, accToUpdate);
 
 		return "Account successfully updated";
 	}
 
 	public int cycleAccounts(String aName) {
+		int count = 0;
+		for (int i = 1; i <= accountMap.size(); i++) {
+			if (accountMap.get(i).getFirstName().equals(aName)) {
+				count++;
+			}
+		}
 
-		return 0;
+		return count;
 	}
 
 	public Map<Integer, Account> getAccountMap() {
@@ -67,9 +75,14 @@ public class AccountMapRepository implements AccountRepository {
 				count++;
 			}
 		}
-		System.out.println(count);
+
 		return count;
 
+	}
+
+	@Override
+	public String getAccount(int id) {
+		return util.getJSONForObject(accountMap.containsKey(id));
 	}
 
 }

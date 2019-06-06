@@ -39,8 +39,13 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public String updateAccount(String movie, int id) {
-		return repo.updateAccount(id, movie);
+	public String updateAccount(String account, int id) {
+		return repo.updateAccount(id, account);
+	}
+
+	@Override
+	public String getAccount(int id) {
+		return repo.getAccount(id);
 	}
 
 }

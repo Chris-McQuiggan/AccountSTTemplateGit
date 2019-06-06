@@ -12,4 +12,6 @@ public interface AccountRepository {
 
 	int cycleAccounts(String fName);
 
+	String getAccount(int id);
+
 }
