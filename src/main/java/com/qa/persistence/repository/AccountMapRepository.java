@@ -1,6 +1,5 @@
 package com.qa.persistence.repository;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.enterprise.inject.Alternative;
@@ -12,9 +11,12 @@ import com.qa.util.JSONUtil;
 @Alternative
 public class AccountMapRepository implements AccountRepository {
 
-	Map<Integer, Account> accountMap = new HashMap<Integer, Account>();
+	@Inject
+	private Map<Integer, Account> accountMap;
+
 	@Inject
 	private JSONUtil util;
+
 	// You must provide concrete implementation for each of these methods
 	// do not change the method signature
 	// THINK - if the parameter is a String
