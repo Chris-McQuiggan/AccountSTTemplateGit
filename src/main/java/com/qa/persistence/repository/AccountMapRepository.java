@@ -6,6 +6,7 @@ import java.util.Map;
 import com.qa.persistence.domain.Account;
 import com.qa.util.JSONUtil;
 
+//@Alternative
 public class AccountMapRepository implements AccountRepository {
 
 	Map<Integer, Account> accountMap = new HashMap<Integer, Account>();

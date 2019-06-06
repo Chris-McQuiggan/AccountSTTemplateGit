@@ -12,9 +12,10 @@ import com.qa.persistence.domain.Account;
 import com.qa.util.JSONUtil;
 
 @Transactional(TxType.SUPPORTS)
+// @Default
 public class AccountDatabaseRepository implements AccountRepository {
 
-	@PersistenceContext(unitName = "Primary")
+	@PersistenceContext(unitName = "primary")
 	private EntityManager em;
 
 	@Override
