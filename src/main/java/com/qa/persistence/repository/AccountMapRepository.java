@@ -3,10 +3,12 @@ package com.qa.persistence.repository;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.enterprise.inject.Alternative;
+
 import com.qa.persistence.domain.Account;
 import com.qa.util.JSONUtil;
 
-//@Alternative
+@Alternative
 public class AccountMapRepository implements AccountRepository {
 
 	Map<Integer, Account> accountMap = new HashMap<Integer, Account>();
@@ -45,9 +47,9 @@ public class AccountMapRepository implements AccountRepository {
 		return "Account successfully updated";
 	}
 
-	public long cycleAccounts(String aName) {
+	public int cycleAccounts(String aName) {
 
-		return 0L;
+		return 0;
 	}
 
 	public Map<Integer, Account> getAccountMap() {

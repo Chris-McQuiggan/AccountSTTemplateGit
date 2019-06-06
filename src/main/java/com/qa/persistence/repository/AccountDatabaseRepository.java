@@ -1,9 +1,13 @@
 package com.qa.persistence.repository;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import javax.transaction.Transactional.TxType;
@@ -12,7 +16,7 @@ import com.qa.persistence.domain.Account;
 import com.qa.util.JSONUtil;
 
 @Transactional(TxType.SUPPORTS)
-// @Default
+@Default
 public class AccountDatabaseRepository implements AccountRepository {
 
 	@PersistenceContext(unitName = "primary")
@@ -50,6 +54,18 @@ public class AccountDatabaseRepository implements AccountRepository {
 		query.executeUpdate();
 		em.persist(account);
 		return "Updated";
+	}
+
+	@Override
+	public int cycleAccounts(String fName) {
+		Query query = em.createQuery("Select a FROM Account a");
+		Collection<Account> accounts = (Collection<Account>) query.getResultList();
+
+		List<Account> validList = accounts.stream().filter(n -> n.getFirstName().equals(fName))
+				.collect(Collectors.toList());
+
+		return validList.size();
+
 	}
 
 }
