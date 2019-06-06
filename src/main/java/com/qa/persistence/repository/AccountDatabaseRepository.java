@@ -31,14 +31,16 @@ public class AccountDatabaseRepository implements AccountRepository {
 		TypedQuery<Account> query = null;
 		query = em.createQuery("SELECT a FROM Account a", Account.class);
 		List<Account> accList = query.getResultList();
-		return new JSONUtil().getJSONForObject(accList);
+		return util.getJSONForObject(accList);
 	}
 
 	@Transactional(TxType.REQUIRED)
 	@Override
 	public String createAccount(String account) {
-		em.persist(account);
-		return account;
+		Account acc1 = util.getObjectForJSON(account, Account.class);
+		em.persist(acc1);
+
+		return "Success:---  " + account;
 	}
 
 	@Transactional(TxType.REQUIRED)

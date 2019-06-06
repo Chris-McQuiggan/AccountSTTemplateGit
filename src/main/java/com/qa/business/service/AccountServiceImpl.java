@@ -15,7 +15,7 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public String addAccount(String account) {
-		if (account.contains("\"id\";\"9999\"")) {
+		if (account.contains("\"accountNumber\";\"9999\"")) {
 
 			return "{\"message\":\"This account is blocked\"}";
 		}
