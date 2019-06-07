@@ -54,10 +54,12 @@ public class AccountDatabaseRepository implements AccountRepository {
 	@Transactional(TxType.REQUIRED)
 	@Override
 	public String updateAccount(int id, String account) {
-		Account acc1 = em.getReference(Account.class, id);
-		em.remove(acc1);
-		acc1 = util.getObjectForJSON(account, Account.class);
-		em.persist(acc1);
+		Account acc1 = util.getObjectForJSON(account, Account.class);
+		Account accountToUpdate = em.getReference(Account.class, id);
+		accountToUpdate.setAccountNumber(acc1.getAccountNumber());
+		accountToUpdate.setFirstName(acc1.getFirstName());
+		accountToUpdate.setLastName(acc1.getLastName());
+		em.persist(accountToUpdate);
 		return "Updated:---   " + account;
 	}
 
